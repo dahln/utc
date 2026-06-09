@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UTC Clock</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="clock-app">
+      <h1>Current UTC Time</h1>
+      <p id="clock" class="led-display" aria-live="polite">--:--:--</p>
+      <label class="toggle" for="hour-format-toggle">
+        <input id="hour-format-toggle" type="checkbox" />
+        <span>Use 12-hour format</span>
+      </label>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
