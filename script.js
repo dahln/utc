@@ -1,20 +1,29 @@
 const STORAGE_KEY = "utc-hour-format";
 
 const clockElement = document.getElementById("clock");
+const localClockElement = document.getElementById("local-clock");
+const timezoneElement = document.getElementById("timezone");
 const toggle = document.getElementById("hour-format-toggle");
 
-function formatUtcTime(date, use12Hour) {
-  let hours = date.getUTCHours();
-  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
-  const seconds = String(date.getUTCSeconds()).padStart(2, "0");
+function formatTime(hours, minutes, seconds, use12Hour) {
+  const mm = String(minutes).padStart(2, "0");
+  const ss = String(seconds).padStart(2, "0");
 
   if (!use12Hour) {
-    return `${String(hours).padStart(2, "0")}:${minutes}:${seconds}`;
+    return `${String(hours).padStart(2, "0")}:${mm}:${ss}`;
   }
 
   const suffix = hours >= 12 ? "PM" : "AM";
   hours = hours % 12 || 12;
-  return `${String(hours).padStart(2, "0")}:${minutes}:${seconds} ${suffix}`;
+  return `${String(hours).padStart(2, "0")}:${mm}:${ss} ${suffix}`;
+}
+
+function formatUtcTime(date, use12Hour) {
+  return formatTime(date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), use12Hour);
+}
+
+function formatLocalTime(date, use12Hour) {
+  return formatTime(date.getHours(), date.getMinutes(), date.getSeconds(), use12Hour);
 }
 
 function getStoredFormat() {
@@ -22,7 +31,9 @@ function getStoredFormat() {
 }
 
 function updateClock() {
-  clockElement.textContent = formatUtcTime(new Date(), toggle.checked);
+  const now = new Date();
+  clockElement.textContent = formatUtcTime(now, toggle.checked);
+  localClockElement.textContent = formatLocalTime(now, toggle.checked);
 }
 
 function handleToggleChange() {
@@ -32,6 +43,8 @@ function handleToggleChange() {
 
 toggle.checked = getStoredFormat();
 toggle.addEventListener("change", handleToggleChange);
+
+timezoneElement.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 updateClock();
 setInterval(updateClock, 1000);
