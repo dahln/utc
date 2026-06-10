@@ -10,12 +10,12 @@ function formatTime(hours, minutes, seconds, use12Hour) {
   const ss = String(seconds).padStart(2, "0");
 
   if (!use12Hour) {
-    return `${String(hours).padStart(2, "0")}:${mm}:${ss}`;
+    return { time: `${String(hours).padStart(2, "0")}:${mm}:${ss}`, suffix: "" };
   }
 
   const suffix = hours >= 12 ? "PM" : "AM";
   hours = hours % 12 || 12;
-  return `${String(hours).padStart(2, "0")}:${mm}:${ss} ${suffix}`;
+  return { time: `${String(hours).padStart(2, "0")}:${mm}:${ss}`, suffix };
 }
 
 function formatUtcTime(date, use12Hour) {
@@ -30,10 +30,18 @@ function getStoredFormat() {
   return localStorage.getItem(STORAGE_KEY) === "12";
 }
 
+function renderTime(element, { time, suffix }) {
+  if (suffix) {
+    element.innerHTML = `${time}<span class="ampm"> ${suffix}</span>`;
+  } else {
+    element.textContent = time;
+  }
+}
+
 function updateClock() {
   const now = new Date();
-  clockElement.textContent = formatUtcTime(now, toggle.checked);
-  localClockElement.textContent = formatLocalTime(now, toggle.checked);
+  renderTime(clockElement, formatUtcTime(now, toggle.checked));
+  renderTime(localClockElement, formatLocalTime(now, toggle.checked));
 }
 
 function handleToggleChange() {

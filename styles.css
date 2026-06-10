@@ -48,10 +48,17 @@ h2 {
   font-size: clamp(2.6rem, 10vw, 5rem);
   letter-spacing: 0.16em;
   color: #56ffcd;
+  white-space: nowrap;
   text-shadow:
     0 0 8px rgba(86, 255, 205, 0.85),
     0 0 20px rgba(86, 255, 205, 0.6),
     0 0 34px rgba(12, 230, 255, 0.45);
+}
+
+.ampm {
+  font-size: 0.45em;
+  letter-spacing: 0.08em;
+  vertical-align: middle;
 }
 
 .toggle {
