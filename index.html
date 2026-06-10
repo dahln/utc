@@ -11,16 +11,16 @@
       <main class="clock-app">
         <h1>Current UTC Time</h1>
         <p id="clock" class="led-display" aria-live="polite">--:--:--</p>
-        <label class="toggle" for="hour-format-toggle">
-          <input id="hour-format-toggle" type="checkbox" />
-          <span>Use 12-hour format</span>
-        </label>
       </main>
       <section class="clock-app local-clock">
         <h2>Local Time</h2>
         <p id="local-clock" class="led-display local-led" aria-live="polite">--:--:--</p>
         <p id="timezone" class="timezone"></p>
       </section>
+      <label class="toggle" for="hour-format-toggle">
+        <input id="hour-format-toggle" type="checkbox" />
+        <span>Use 12-hour format</span>
+      </label>
     </div>
     <script src="script.js"></script>
   </body>
