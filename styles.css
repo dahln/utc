@@ -2,17 +2,21 @@
   color-scheme: dark;
 }
 
+html,
+body {
+  overflow: hidden;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: radial-gradient(circle at top, #1f2a5a 0%, #0e1022 50%, #06070f 100%);
   color: #e9f4ff;
